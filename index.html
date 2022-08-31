@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -22,9 +22,23 @@
     <header>
       <nav>
         <div class="logo">
-          <h1>Movyly</h1>
+          <a href="/"><h1>Movyly</h1></a>
         </div>
+        <ul class="links">
+          <li><i class="fa-solid fa-chart-line"></i> Trending</li>
+          <li><i class="fa-solid fa-film"></i> Theaters</li>
+          <li><i class="fa-solid fa-clapperboard"></i> Movies</li>
+          <li><i class="fa-solid fa-tv-alt"></i> Tv Shows</li>
+          <li><i class="fa-solid fa-list-ul"></i> Categories</li>
+        </ul>
+        <form id="form">
+          <input type="text" id="search" placeholder="Enter keywords to search" class="search" />
+          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
       </nav>
     </header>
+    <main>
+      <div id="container"></div>
+    </main>
   </body>
 </html>
