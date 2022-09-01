@@ -90,6 +90,49 @@ main .hero .about .desc{
     justify-content: center;
     gap: 2rem ;
 }
+.card{
+    width: 300px;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgb(0 0 0 / 10%);
+    background-color: var(--secondary-color);
+    position: relative;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+.card .about-movie{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.card .about-movie h4{
+    color: #FC4C02;
+}
+.card img{
+    width: 100%;
+    object-fit: cover;
+}
+.flex{
+    display: flex;
+}
+.cta {
+    margin-top: 20px;
+}
+.btn{
+    padding: 8px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: transparent;
+    border-radius: 20px;
+    border: 2px solid #FC4C02;
+    color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.1s ease-in;
+}
+.btn.left{
+    margin-left: 5rem;
+}
+
 /* dropdown */
 .categories li {
   color: #000;
