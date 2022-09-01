@@ -170,3 +170,32 @@ main .hero .about .desc{
     padding:20px;
     cursor:pointer;
 }
+
+
+/* movie details overview */
+.overview{
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: #f8f8f8;
+    padding: 1rem;
+    max-height: 100%;
+    transform:translateY(100%);
+    transition:transform 0.2s ease-in-out;
+}
+
+.card:hover .overview{
+    transform:translateY(0)
+}
+.overview p{
+    padding: 12px 0;
+}
+.overview .btn{
+    color: #000;
+    margin: 0 auto;
+    width: 100%;
+}
+.btn:hover{
+    box-shadow: 0 0 20px #FC4C02;
+}
