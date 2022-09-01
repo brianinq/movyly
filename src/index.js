@@ -61,9 +61,18 @@ function getCategories(api){
             li.id = id
             li.textContent = name
             categories.appendChild(li)
-            li.addEventListener("click",fetchByCategory)
+            li.addEventListener("click",(e)=>{
+                fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=1cf50e6248dc270629e802686245c2c8&with_genres=${e.target.id}`)
+                .then(res=> res.json())
+                .then(data => displayMovies(data.results, false))
+                .catch(error=>container.innerHTML = error.message)
+            })
         });
     })
+}
+
+function fetchByCategory(e){
+    
 }
 
 
