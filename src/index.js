@@ -65,3 +65,11 @@ function getCategories(api){
         });
     })
 }
+
+
+
+function setHero(movie){
+    hero.querySelector(".about .title").textContent = movie.title
+    hero.querySelector(".about .desc").textContent = movie.overview
+    hero.style.background = `linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.83)), url(${IMAGE_PATH}${movie.backdrop_path}) center center/cover`
+}
