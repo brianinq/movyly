@@ -9,7 +9,48 @@ const main = document.querySelector("main")
 const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280"
 const container = document.querySelector("#container")
 let page = 1
+document.addEventListener("DOMContentLoaded",()=>{
+    getCategories(CATEGORIES_ENDPOINT)
+    getMovies(page)
+    // setHero(heroMovie)
+})
 
+
+function getMovies(page){
+    fetch(API+page)
+    .then(res=> res.json())
+    .then(data => displayMovies(data.results))
+    .catch(error=>container.innerHTML = error.message)
+}
+
+function displayMovies(movies, heroState=true){
+    // 
+    heroState?setHero(movies[Math.floor(Math.random() * movies.length)]): hero.style.display = "none"
+    container.innerHTML = ""
+    movies.forEach(movie=>{
+        const {title, poster_path, vote_average, overview, id} = movie
+        let moviecard = document.createElement("div")
+        moviecard.innerHTML = `
+             <img src="${poster_path ? IMAGE_PATH + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}">
+
+            <div class="about-movie">
+                <h3>${title}</h3>
+                <h4>${vote_average}</h4>
+            </div>
+
+            <div class="overview">
+
+                <h3>${title}</h3>
+                <p>${overview}</p>
+                <button class="btn" id="${id}"><i class="fa-regular fa-heart"></i> Favourite</button
+            </div>
+        
+        `
+        moviecard.classList.add("card")
+        container.appendChild(moviecard)
+
+    })
+}
 function getCategories(api){
     fetch(api)
     .then(res=> res.json())
