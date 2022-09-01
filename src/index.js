@@ -9,3 +9,18 @@ const main = document.querySelector("main")
 const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280"
 const container = document.querySelector("#container")
 let page = 1
+
+function getCategories(api){
+    fetch(api)
+    .then(res=> res.json())
+    .then(data=>{
+        data.genres.forEach(genre => {
+            const {name, id} = genre
+            let li = document.createElement("li")
+            li.id = id
+            li.textContent = name
+            categories.appendChild(li)
+            li.addEventListener("click",fetchByCategory)
+        });
+    })
+}
