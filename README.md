@@ -18,6 +18,7 @@ After Downloading or getting your local copy fire up your code editor and view t
 ## Known Bugs
 
 The code is still being made responsive for mobile views.
+State tracking is still buggy.
 
 ## Technologies used
 
