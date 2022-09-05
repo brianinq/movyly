@@ -16,8 +16,11 @@ const liked = document.querySelector("#favs")
 const theater = document.querySelector("#theaters")
 const heroFav = document.querySelector(".cta button.left")
 const favourites = []
+const next = document.querySelector("#next")
+const previous = document.querySelector("#prev")
+const current = document.querySelector("#current")
 let page = 1
-
+let currentApi = API
 function getDates(){
     let date = new Date()
     let today = date.toISOString().split("T")[0]
@@ -32,16 +35,25 @@ document.addEventListener("DOMContentLoaded",()=>{
     getMovies(page, API)
     
     series.addEventListener("click",()=>{
+        page=1
+        current.textContent = page
         getMovies(page, SERIES_ENDPOINT)
+        currentApi = SERIES_ENDPOINT
     })
     movies.addEventListener("click",()=>{
+        page=1
+        current.textContent = page
         getMovies(page, API)
+        currentApi = SERIES_ENDPOINT
     })
     theater.addEventListener("click", ()=>{
+        page=1
+        current.textContent = page
         const [start, end] = getDates()
         const link = `https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=${start}&primary_release_date.lte=${end}&api_key=${API_KEY}&page=`
         console.log(link);
         getMovies(page, link)
+        currentApi = link
     })
     liked.addEventListener("click",()=>{
         if (!favourites.length) {
@@ -50,6 +62,19 @@ document.addEventListener("DOMContentLoaded",()=>{
             return
         }
         displayMovies(favourites, false)
+    })
+    next.addEventListener("click", ()=>{
+        page+=1
+        current.textContent = page
+        getMovies(page, currentApi)
+        window.scrollTo({top: 0})
+    })
+    previous.addEventListener("click", ()=>{
+        if (page===1) return
+        page-=1
+        current.textContent = page
+        getMovies(page, currentApi)
+        window.scrollTo({top: 0})
     })
 })
 
@@ -106,7 +131,10 @@ function getCategories(api){
             li.textContent = name
             categories.appendChild(li)
             li.addEventListener("click",(e)=>{
-                fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=1cf50e6248dc270629e802686245c2c8&with_genres=${e.target.id}`)
+                page=1
+                current.textContent = page
+                currentApi = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=1cf50e6248dc270629e802686245c2c8&with_genres=${e.target.id}&page=`
+                fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=1cf50e6248dc270629e802686245c2c8&with_genres=${e.target.id}&page=${page}`)
                 .then(res=> res.json())
                 .then(data => displayMovies(data.results, false))
                 .catch(error=>container.innerHTML = error.message)
@@ -127,6 +155,9 @@ form.addEventListener("submit", (e) => {
         .then(data => displayMovies(data.results, false))
         .catch(error=>container.innerHTML = error.message)
         input.value = "";
+        page=1
+        current.textContent = page
+        currentApi = SEARCH_ENDPOINT
     }
 });
 
