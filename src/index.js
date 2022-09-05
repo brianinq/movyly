@@ -12,7 +12,10 @@ const container = document.querySelector("#container")
 const form = document.querySelector("#form")
 const series = document.querySelector("#series")
 const movies = document.querySelector("#movies")
+const liked = document.querySelector("#favs")
 const theater = document.querySelector("#theaters")
+const heroFav = document.querySelector(".cta button.left")
+const favourites = []
 let page = 1
 
 function getDates(){
@@ -39,6 +42,14 @@ document.addEventListener("DOMContentLoaded",()=>{
         const link = `https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=${start}&primary_release_date.lte=${end}&api_key=${API_KEY}&page=`
         console.log(link);
         getMovies(page, link)
+    })
+    liked.addEventListener("click",()=>{
+        if (!favourites.length) {
+            container.innerHTML = `You have no favourites yet click on<i class="fa-regular fa-heart"></i>to favourite a title.`
+            hero.remove()
+            return
+        }
+        displayMovies(favourites, false)
     })
 })
 
@@ -76,6 +87,11 @@ function displayMovies(movies, heroState=true){
         `
         moviecard.classList.add("card")
         container.appendChild(moviecard)
+        let fav = moviecard.querySelector("button")
+        fav.addEventListener("click", ()=>{
+            favourites.push(movie)
+            fav.innerHTML = `<i class="fa-solid fa-heart"></i> Favourited`
+        })
 
     })
 }
@@ -119,5 +135,10 @@ function setHero(movie){
     hero.querySelector(".about .title").textContent = movie.title? movie.title: movie.name
     hero.querySelector(".about .desc").textContent = movie.overview
     hero.style.background = `linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.83)), url(${IMAGE_PATH}${movie.backdrop_path}) center center/cover`
+
+    heroFav.addEventListener("click", ()=>{
+            favourites.push(movie)
+            heroFav.innerHTML = `<i class="fa-solid fa-heart"></i> Favourited`
+        })
 }
 
